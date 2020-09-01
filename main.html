@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RainBow - Background</title>
+    <link rel="icon" href="img/rainbow.svg">
+    <link rel="stylesheet" href="css/alertify.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header__inner">
+            <div class="cta-wrapper">
+                <div class="header__logo">
+                    <a href="#rainbow" id="rainbow">
+                        <img src="img/rainbow.svg" id="rainbow">
+                    </a>
+                </div>
+                <div class="input__box">
+                    <input type="checkbox" class="input__blue" id="default-state-cta">
+                    <input type="checkbox" class="input__violet" id="violet-state-cta">
+                    <input type="checkbox" class="input__orange" id="orange-state-cta">
+                </div>
+                <span id="off-state-cta">STOP</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="canvas-interactive-wrapper">
+        <canvas id="canvas-interactive"></canvas>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/granim.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+    Swal.fire({
+    title: 'Press F11 to Full screen',
+    width: 400,
+    padding: '3em',
+    background: '#fff'
+    
+})
+    </script>
+    <script>
+    let colorSpeed = 400
+    let granimInstance = new Granim({
+    element: '#canvas-interactive',
+    name: 'interactive-gradient',
+    elToSetClassOn: '.canvas-interactive-wrapper',
+    direction: 'left-right',
+    isPausedWhenNotInView: true,
+    stateTransitionSpeed: 500,
+    states : {
+        "rainbow": {
+            gradients: [
+                ['#00c8e9', '#808fd0'],
+                ['#68eff7', '#f568f7'],
+                ['#9599E2', '#8BC6EC'],
+                ['#ff5f5f', '#f7f168'],
+                ['#68eff7', '#f568f7']
+            ],
+            transitionSpeed: colorSpeed
+        },
+        "default-state": {
+            gradients: [
+                ['#0093E9', '#80D0C7'],
+                // ['#8EC5FC', '#E0C3FC'],
+                ['#9599E2', '#8BC6EC']
+            ],
+            transitionSpeed: 2000
+        },
+        "violet-state": {
+            gradients: [
+                ['#9D50BB', '#6E48AA'],
+                ['#4776E6', '#8E54E9']
+            ],
+            transitionSpeed: 2000
+        },
+        "orange-state": {
+            gradients: [ 
+                ['#fbab7e', '#f7ce68'], 
+                ['#f7ce68', '#fbab7e'], 
+                ['#FFE53B', '#FF8A5D'], 
+                ['#FF8A5D', '#FFE53B'], 
+            ],
+            transitionSpeed: 400,
+        },
+        "off-state": {
+            gradients: [
+                ['#f0feff', '#b4b4b4'],
+                ['#b4b4b4', '#f0feff']
+            ],
+            transitionSpeed: 1000
+        },
+    }
+});
+    $('#rainbow').on('click', function(event) {
+        event.preventDefault();
+        granimInstance.changeState('rainbow');
+        setClass('#rainbow')
+    });
+    $('#default-state-cta').on('click', function(event) {
+        event.preventDefault();
+        granimInstance.changeState('default-state');
+        setClass('#default-state-cta')
+    });
+    $('#violet-state-cta').on('click', function(event) {
+        event.preventDefault();
+        granimInstance.changeState('violet-state');
+        setClass('#violet-state-cta')
+    });
+    $('#off-state-cta').on('click', function(event) {
+        event.preventDefault();
+        granimInstance.changeState('off-state');
+        setClass('#off-state-cta')
+    });
+    $('#orange-state-cta').on('click', function(event) {
+        event.preventDefault();
+        granimInstance.changeState('orange-state');
+        setClass('#orange-state-cta')
+    });
+
+    function setClass(element) {
+        $('.canvas-interactive-wrapper a').removeClass('active');
+        $(element).addClass('active');
+    };
+    </script>
+</body>
+</html>
