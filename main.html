@@ -6,6 +6,7 @@
     <title>RainBow - Background</title>
     <link rel="icon" href="img/rainbow.svg">
     <link rel="stylesheet" href="css/alertify.min.css">
+    <link href="nouislider.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,6 +23,7 @@
                     <input type="checkbox" class="input__violet" id="violet-state-cta">
                     <input type="checkbox" class="input__orange" id="orange-state-cta">
                 </div>
+                <button class="fullScreen">fullScreen</button>
                 <span id="off-state-cta">STOP</span>
             </div>
         </div>
@@ -35,17 +37,12 @@
     <script src="js/granim.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="nouislider.js"></script>
     <script>
-    Swal.fire({
-    title: 'Press F11 to Full screen',
-    width: 400,
-    padding: '3em',
-    background: '#fff'
-    
-})
-    </script>
-    <script>
-    let colorSpeed = 400
+    let fullScreenMode = document.querySelector('.fullScreen')
+    fullScreenMode.addEventListener('click', e => document.body.requestFullscreen())
+
+    let colorSpeed = 700
     let granimInstance = new Granim({
     element: '#canvas-interactive',
     name: 'interactive-gradient',
@@ -90,10 +87,10 @@
         },
         "off-state": {
             gradients: [
-                ['#f0feff', '#b4b4b4'],
-                ['#b4b4b4', '#f0feff']
+                ['#fff', '#b4b4b4'],
+                ['#b4b4b4', '#fff']
             ],
-            transitionSpeed: 1000
+            transitionSpeed: 500
         },
     }
 });
